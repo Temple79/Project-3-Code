@@ -1,27 +1,34 @@
 const api_url="http://localhost:5678/api/works";
-let dataEl;
-//"http://localhost:5678/api-docs/"
-async function getApi(url){
+const gallery=document.querySelector(".gallery");
+
+async function getApiData(url){
     const response=await fetch(url);
     const data=await response.json();
-    dataEl=data
-    return dataEl
+    return data
 }
 
-getApi()
-console.log(dataEl)
-const gallery=document.querySelector(".gallery")
+function currentGallery(data){
+    gallery.innerHTML=""
 
-function projects (){
-for (let i=0; i<data.lenght; i++) {
-    const figureEl=document.createElement("figure");
-    const imageEl=document.createElement("img");
-    const figcaptionEl=document.createElement("figcaption");
-    figcaptionEl.innerText=data[i].title
-    imageEl.src=data[i].imageUrl;
-    imageEl.alt=data[i].title;
-    figureEl.appendChild(imageEl);
-    figureEl.appendChild(figcaptionEl);
-    gallery.appendChild(figureEl);
+    for (let i=0; i<data.length; i++) {
+        const figure=document.createElement("figure");
+        const image=document.createElement("img");
+        const figcaption=document.createElement("figcaption");
+
+        figcaption.textContent=data[i].title;
+        image.src=data[i].imageUrl;
+        image.alt=data[i].title;
+
+        figure.appendChild(image);
+        figure.appendChild(figcaption);
+
+        gallery.appendChild(figure);
+    }
+} 
+
+
+async function initialPageLoad(){
+    const data=await getApiData(api_url)
+    currentGallery(data)
 }
-}
+initialPageLoad()
