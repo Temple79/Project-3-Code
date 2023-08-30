@@ -98,6 +98,71 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+#loginActive {
+	font-weight: bold;
+}
+
+.bodyLogin {
+	display: flex;
+	flex-direction: column;
+	height: 50%;
+}
+
+.mainLogin {
+	height: 500px;
+}
+
+.mainLogin h2 {
+	margin-top: 150px;
+	margin-bottom: 50px;
+}
+
+#login {
+	height: 250px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+}
+
+#formLogin {
+	width: 30%;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+#emailLogin {
+	border: none;
+	box-shadow: 4px 4px 4px 4px  whitesmoke;
+	height: 40px;
+}
+
+#password {
+	border: none;
+	box-shadow: 4px 4px 4px 4px  whitesmoke;
+	height: 40px
+}
+
+#connect {
+	height: 36px;
+	border: none;
+}
+
+.mainLogin p {
+	text-decoration: underline;
+}
+
+.footerLogin {
+	justify-content:flex-end;
+}
+
 #introduction {
 	display: flex;
 	align-items: center;
