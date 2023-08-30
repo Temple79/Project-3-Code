@@ -155,7 +155,14 @@ a {
 	border: none;
 }
 
-.mainLogin p {
+.incorrect {
+	text-decoration: none;
+	color: red;
+	margin-bottom: 20px;
+	display: none;
+}
+
+.passwordLost {
 	text-decoration: underline;
 }
 
