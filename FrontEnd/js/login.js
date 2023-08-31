@@ -2,7 +2,8 @@ const formLogin = document.querySelector("#formLogin")
 const incorrect = document.querySelector(".incorrect")
 const urlLogin = 'http://localhost:5678/api/users/login'
 
-formLogin.addEventListener("submit", ajoutForm)
+formLogin.addEventListener("submit", (event)=> ajoutForm(event))
+
 
 async function ajoutForm (event) {
     event.preventDefault()
@@ -17,7 +18,7 @@ async function ajoutForm (event) {
 }
 
 async function login (email, password) {
-    const user = {email: 'email', password: 'password'}
+    const user = {email: email, password: password}
     let response = await fetch('http://localhost:5678/api/users/login', {
         method: 'POST',
         headers: {
@@ -25,6 +26,19 @@ async function login (email, password) {
         },
         body: JSON.stringify(user)
     })
+
+    //vérifier le result
     let result = await response.json()
+
+    //uniquement si result positif
+    if (resultPositif) {
+        localStorage.setItem('token', result.token)
+
+        //redirection sur la page index
+        window.location="index.html"
+    } else {
+        localStorage.clear()
+    }
     console.log(result)
+    console.log(localStorage)
 }
