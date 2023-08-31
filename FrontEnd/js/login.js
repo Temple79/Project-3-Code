@@ -31,7 +31,7 @@ async function login (email, password) {
     let result = await response.json()
 
     //uniquement si result positif
-    if (resultPositif) {
+    if (result.userId === 1) {
         localStorage.setItem('token', result.token)
 
         //redirection sur la page index
