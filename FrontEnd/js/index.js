@@ -33,24 +33,30 @@ function iAmNotAnAdmin() {
 initialPageLoad()
 
 function createBannerEdition() {
-    const header = document.querySelector("header")
+    const body = document.querySelector("body")
     const bannerEdtion = document.createElement("div")
     const modeEdition = document.createElement("span")
     const editImage = document.createElement("img")
 
-    editImage.src = "./assets/icons/Edit_icon.png"
+    editImage.src = "./assets/icons/edit.svg"
     editImage.alt = "Edit icon"
+    editImage.style.width = "20px"
 
-    modeEdition.appendChild(editImage)
+    bannerEdtion.appendChild(editImage)
 
     modeEdition.textContent = "Mode édition"
 
-    bannerEdtion.style.backgroundColor = "red"
+    bannerEdtion.style.backgroundColor = "black"
     bannerEdtion.style.height = "50px"
+    bannerEdtion.style.display = "flex"
+    bannerEdtion.style.justifyContent = "center"
+    bannerEdtion.style.alignItems = "center"
     modeEdition.style.color = "white"
-    modeEdition.style.fontSize = "10px"
+    modeEdition.style.fontSize = "16px"
+    modeEdition.style.fontStyle = "Work Sans"
+
 
     bannerEdtion.appendChild(modeEdition)
-    header.before(bannerEdtion)
+    body.prepend(bannerEdtion)
 }
 
