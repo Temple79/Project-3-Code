@@ -7,17 +7,45 @@ function filter__create() {
     buttonsArray.forEach(element => {
         let button = document.createElement("button")
         button.textContent = element
-        // button.classList.add("btn")
-        // button.style.color="#1D6154"
-        // button.style.borderRadius="60px"
-        // button.style.borderColor="#1D6154"
-        // button.style.height="37px"
-        // button.style.fontStyle="bold"
+        button.classList.add("btn")
+        divFilter.style.display="flex"
+        divFilter.style.justifyContent="center"
+        divFilter.style.alignItems="center"
+        divFilter.style.paddingBottom="30px"
+        divFilter.style.gap="10px"
+        button.style.color="#1D6154"
+        button.style.backgroundColor="inherit"
+        button.style.borderRadius="60px"
+        button.style.borderColor="#1D6154"
+        button.style.height="37px"
+        button.style.fontWeight="bolder"
+        button.style.borderWidth="1px"
+        button.style.alignItems="center"
+        button.style.padding="10px"
+
         divFilter.appendChild(button)
     });
+
+
     divFilter.addEventListener("click", filter__eventHandler)
 
+
     gallery.before(divFilter)
+
+//     const buttonHover = document.querySelector(".btn")
+//     buttonHover.addEventListener("mouseover", hoverOn, false)
+//     buttonHover.addEventListener("mouseout", hoverOff, false)
+
+//     function hoverOn()
+//     {   
+//    buttonHover.setAttribute("style", "background-color:green;")
+//     }
+
+//     function hoverOff()
+//     {  
+//    buttonHover.setAttribute("style", "background-color:inherit;")
+//     }
+    
 
 }
 
@@ -46,3 +74,4 @@ function filter__apply(datas, filter) {
         return x.categoryId === filter;
     })
 }
+

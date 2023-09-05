@@ -34,17 +34,25 @@ initialPageLoad()
 
 function createBannerEdition() {
     const body = document.querySelector("body")
+    const mesProjets = document.querySelector("#mesProjets")
     const bannerEdtion = document.createElement("div")
     const modeEdition = document.createElement("span")
     const editImage = document.createElement("img")
+    const buttonModifier = document.createElement("span")
+    const imageModifier = document.createElement("img")
 
     editImage.src = "./assets/icons/edit.svg"
     editImage.alt = "Edit icon"
     editImage.style.width = "20px"
 
+    imageModifier.src = "./assets/icons/imageModifier.png"
+
     bannerEdtion.appendChild(editImage)
 
+    mesProjets.appendChild(imageModifier)
+
     modeEdition.textContent = "Mode édition"
+    buttonModifier.textContent = "modifier"
 
     bannerEdtion.style.backgroundColor = "black"
     bannerEdtion.style.height = "50px"
@@ -53,10 +61,21 @@ function createBannerEdition() {
     bannerEdtion.style.alignItems = "center"
     modeEdition.style.color = "white"
     modeEdition.style.fontSize = "16px"
-    modeEdition.style.fontStyle = "Work Sans"
+    modeEdition.style.fontFamily = "Work Sans"
+    mesProjets.style.display = "flex"
+    mesProjets.style.justifyContent = "center"   
+    mesProjets.style.alignItems = "center"
+    mesProjets.style.gap = "10px"
+    imageModifier.style.height = "15px"
+    imageModifier.style.paddingLeft = "10px"
+    buttonModifier.style.fontSize = "15px"
+    buttonModifier.style.color = "black"
+    buttonModifier.style.fontFamily = "Work Sans"
+    buttonModifier.style.fontWeight = "lighter"
 
 
     bannerEdtion.appendChild(modeEdition)
     body.prepend(bannerEdtion)
+    mesProjets.appendChild(buttonModifier)
 }
 
