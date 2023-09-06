@@ -4,6 +4,7 @@ function filter__create() {
     const gallery = document.querySelector(".gallery");
     const buttonsArray = ["Tous", "Objets", "Appartements", "Hôtels & Restaurants"]
     const divFilter = document.createElement("div")
+    divFilter.className += "divFilters"
     buttonsArray.forEach(element => {
         let button = document.createElement("button")
         button.textContent = element

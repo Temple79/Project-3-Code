@@ -24,7 +24,13 @@ function checkIsAdmin()
 function iAmAnAdmin() {
     const buttonLogin = document.querySelector("#buttonLogin")
     buttonLogin.textContent = "Logout"
+    
+    const divFilter = document.querySelector(".divFilters")
+    divFilter.remove()
+
     createBannerEdition()
+
+    addEventForBtnModif()
 }
 function iAmNotAnAdmin() {
     alert ("je ne suis pas un admin")
@@ -38,7 +44,7 @@ function createBannerEdition() {
     const bannerEdtion = document.createElement("div")
     const modeEdition = document.createElement("span")
     const editImage = document.createElement("img")
-    const buttonModifier = document.createElement("span")
+    const buttonModifier = document.createElement("a")
     const imageModifier = document.createElement("img")
 
     editImage.src = "./assets/icons/edit.svg"
@@ -52,7 +58,10 @@ function createBannerEdition() {
     mesProjets.appendChild(imageModifier)
 
     modeEdition.textContent = "Mode édition"
+
+    buttonModifier.setAttribute('href', "#modal")
     buttonModifier.textContent = "modifier"
+    buttonModifier.className = "js_modal"
 
     bannerEdtion.style.backgroundColor = "black"
     bannerEdtion.style.height = "50px"
@@ -78,4 +87,6 @@ function createBannerEdition() {
     body.prepend(bannerEdtion)
     mesProjets.appendChild(buttonModifier)
 }
+
+
 
