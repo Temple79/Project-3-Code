@@ -39,6 +39,7 @@ async function login (email, password) {
     } else {
         localStorage.clear()
     }
-    console.log(result)
-    console.log(localStorage)
+
 }
+
+
