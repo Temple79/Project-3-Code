@@ -1,23 +1,7 @@
-// const openModal = function(e) {
-//     e.preventDefault()
-//     const target = document.querySelector(e.target.getAttribute('href'))
-//     target.style.display = "none"
-// }
 
-// document.querySelectorAll(".js_modal").forEach(a => {
-//     a.addEventListener('click', openModal)
-// })
+const gallery = document.querySelector(".gallery")
+const cloneGallery = gallery.cloneNode(true)
 
-
-
-
-// const modal = document.getElementById("modal")
-// const buttonModifier = document.querySelector(".js_modal")
-// console.log(buttonModifier)
-
-// function openModal() {
-//     modal.style.display = "none"
-// }
 closeModal();
 
 //showModal();
@@ -34,11 +18,26 @@ closeModal();
     const modal=document.querySelector("#modal");
     const overlay=document.querySelector("#overlay");
 
-     modal.style.display = "block"
-     overlay.style.display = "block"
+    modal.style.display = "block"
+    overlay.style.display = "block"
+
+    addGalleryForModal()
+     
  }
 
  function addEventForBtnModif() {
     const buttonModifier = document.querySelector(".js_modal")
     buttonModifier.addEventListener("click", showModal)
  }
+
+ function addEventForBtnClose() {
+   const buttonClose = document.querySelector(".close")
+   buttonClose.addEventListener("click", closeModal)
+ }
+
+ function addGalleryForModal() {
+   const modalGallery = document.querySelector(".modalGallery")
+   modalGallery.appendChild(cloneGallery)
+ }
+
+ addEventForBtnClose()
