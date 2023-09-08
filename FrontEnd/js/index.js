@@ -13,6 +13,7 @@ async function initialPageLoad() {
     const data = await getApiData(api_url)
     filter__create()
     gallery__show(data)
+    modal__(data)
     checkIsAdmin()
 }
 
