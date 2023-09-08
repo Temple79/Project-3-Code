@@ -1,6 +1,10 @@
 
 const gallery = document.querySelector(".gallery")
 const cloneGallery = gallery.cloneNode(true)
+const figure = cloneGallery.getElementsByTagName("figure")
+
+
+
 
 closeModal();
 
@@ -13,6 +17,7 @@ closeModal();
      modal.style.display = "none"
      overlay.style.display = "none"
  }
+
  function showModal() {
 
     const modal=document.querySelector("#modal");
@@ -35,9 +40,28 @@ closeModal();
    buttonClose.addEventListener("click", closeModal)
  }
 
- function addGalleryForModal() {
+   function addGalleryForModal() {
    const modalGallery = document.querySelector(".modalGallery")
    modalGallery.appendChild(cloneGallery)
+   console.log(modalGallery)  
+   const arr = Array.from(figure)
+   addTrashIcon(arr)
+
  }
 
  addEventForBtnClose()
+
+ function addTrashIcon(arr) {
+
+   for (let i = 0; i < arr.length; i++) {
+      const trashIcon = document.createElement("img")
+    /*  trashIcon.innerText='test';
+      trashIcon.classList.add("fas")
+      trashIcon.classList.add("fa-trash")
+      trashIcon.classList.add("iconDelete")*/
+      trashIcon.src = "./assets/icons/trash.png"
+         trashIcon.className="iconDelete"
+
+      arr[i].appendChild(trashIcon)
+ }
+}

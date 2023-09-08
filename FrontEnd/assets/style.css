@@ -297,28 +297,66 @@ footer nav ul {
  .modal .close {
 	position: relative;
 	left: 250px;
-	top: -30px;
+	top: -20px;
 	background-color: white;
 	border: none;
 	font-size:x-large;
+ }
+
+ #modalHeader {
+	position: relative;
+	top: -10px;
+	padding-bottom: 30px;
+	font-size: 26px;
+	font-weight: 500;
  }
 
  .modal .gallery {
 	border: 1px solid red;
 	display: flex;
 	flex-wrap: wrap;
-	height: 500px;
-	width: 70%;
-	padding-left: 50px;
-	position: relative;
-	left: 70px;
+	height: 400px;
+	width: 100%;
+	padding: 35px;
+	box-sizing: border-box;
+	gap: 10px;
  }
+ .modal .gallery figure {
+	position: relative;
+	
 
- .modal .gallery img {
+ }
+ .modal .gallery figure img:first-child {
 	width: 76px;
 	height: 102px;
+	border:1px blue solid;
+ }
+
+ .iconDelete {
+	position: absolute;
+		height: 20px;
+		width:20px !important;
+		right:3px;
  }
 
  .modal .gallery figcaption {
 	display: none;
+ }
+
+ .line {
+	width: 430px;
+	border-top: 1px solid #B3B3B3;
+	margin-top: 40px;
+  }
+
+ #modalAjouter {
+	width: 237px;
+	height: 36px;
+	border-radius: 60px;
+	background-color: #1D6154;
+	color: #FFFFFF;
+	border: 0px;
+	font-family: Syne;
+	font-size: 14px;
+	margin-top: 30px;
  }
