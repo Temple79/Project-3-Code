@@ -8,7 +8,7 @@ const figure = cloneGallery.getElementsByTagName("figure")
 
 closeModal();
 
-//showModal();
+
  function closeModal() {
 
     const overlay=document.querySelector("#overlay");
@@ -42,8 +42,7 @@ closeModal();
 
    function addGalleryForModal() {
    const modalGallery = document.querySelector(".modalGallery")
-   modalGallery.appendChild(cloneGallery)
-   console.log(modalGallery)  
+   modalGallery.appendChild(cloneGallery) 
    const arr = Array.from(figure)
    addTrashIcon(arr)
 
@@ -55,12 +54,8 @@ closeModal();
 
    for (let i = 0; i < arr.length; i++) {
       const trashIcon = document.createElement("img")
-    /*  trashIcon.innerText='test';
-      trashIcon.classList.add("fas")
-      trashIcon.classList.add("fa-trash")
-      trashIcon.classList.add("iconDelete")*/
       trashIcon.src = "./assets/icons/trash.png"
-         trashIcon.className="iconDelete"
+      trashIcon.className="iconDelete"
 
       arr[i].appendChild(trashIcon)
  }
