@@ -11,6 +11,7 @@ function gallery__show(data) {
         figcaption.textContent = data[i].title
         image.src = data[i].imageUrl
         image.alt = data[i].title
+        image.id = data[i].id
         image.classList.add("imgGallery")
 
         figure.appendChild(image)
