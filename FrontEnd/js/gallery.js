@@ -19,3 +19,5 @@ function gallery__show(data) {
         gallery.appendChild(figure)
     }
 }
+
+

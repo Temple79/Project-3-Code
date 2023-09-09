@@ -2,12 +2,6 @@
 const portfolio = document.querySelector("#portfolio")
 
 
-
-
-
-
-
-
 // Initial Page Load
 async function initialPageLoad() {
     const data = await getApiData(api_url)
