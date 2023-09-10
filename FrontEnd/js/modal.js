@@ -1,8 +1,7 @@
 
 
-const gallery = document.querySelector(".gallery")
-const cloneGallery = gallery.cloneNode(true)
-const figure = cloneGallery.getElementsByTagName("figure")
+const modalGallery = document.querySelector(".modalGallery")
+const figure = modalGallery.getElementsByTagName("figure")
 
 
 closeModal();
@@ -41,12 +40,9 @@ closeModal();
 
    async function addGalleryForModal() {
    let modalData = await getApiData(api_url)
-   modal__show(modalData)
-   console.log(modalData)
-  //  const modalGallery = document.querySelector(".modalGallery")
-  //  modalGallery.appendChild(cloneGallery) 
-  //  const arr = Array.from(figure)
-  //  addTrashIcon(arr)
+   modal__show(modalData) 
+   const arr = Array.from(figure)
+   addTrashIcon(arr)
  }
 
  function modal__show(data) {
@@ -72,40 +68,90 @@ closeModal();
 
  addEventForBtnClose()
 
-//  function addTrashIcon(arr) {
+ function addTrashIcon(arr) {
 
-//    for (let i = 0; i < arr.length; i++) {
-//       const trashIcon = document.createElement("img")
-//       trashIcon.src = "./assets/icons/trash.png"
-//       trashIcon.className="iconDelete"
+   for (let i = 0; i < arr.length; i++) {
+      const trashIcon = document.createElement("img")
+      trashIcon.src = "./assets/icons/trash.png"
+      trashIcon.className="iconDelete"
+      
+      arr[i].appendChild(trashIcon)
 
-//       arr[i].appendChild(trashIcon)
+      trashIcon.addEventListener("click", async (e) => {
+         e.preventDefault();
+         e.stopPropagation();
 
-//       trashIcon.addEventListener("click", async (e) => {
-//          e.preventDefault();
-//          e.stopPropagation();
-//          let image = e.target.parentNode.firstElementChild
-//          image.parentElement.remove()
-//          console.log(image)
-//          console.log(image.id)
-//          let articleID = image.id
-//          let monToken = localStorage.getItem("token");
-//          let response = await fetch(
-//            `http://localhost:5678/api/works/${articleID}`,
-//            {
-//              method: "DELETE",
-//              headers: {
-//                accept: "*/*",
-//                Authorization: `Bearer ${monToken}`,
-//              },
-//            }
-//          );
-//          console.log(response)
-//          if (response.ok) {
-//            return false;
-//          } else {
-//            alert("Echec de suppression");
-//          }
-//        })
-//  }
-//  }
+         let image = e.target.parentNode.firstElementChild
+         let articleID = image.dataset.id         
+         let monToken = localStorage.getItem("token");
+
+         let response = await fetch(
+           `http://localhost:5678/api/works/${articleID}`,
+           {
+             method: "DELETE",
+             headers: {
+               accept: "*/*",
+               Authorization: `Bearer ${monToken}`,
+             },
+           }
+         );
+         console.log(response)
+         if (response.ok) {
+           return false;
+         } else {
+           alert("Echec de suppression");
+         }
+      })
+   }
+}
+
+function addWorks () {
+   const buttonClose = document.querySelector (".close")
+
+   const buttonBack = document.createElement ("img")
+   buttonBack.src = "./assets/icons/Back-Button-PNG-Pic.png"
+   buttonBack.className = "buttonBack"
+   buttonClose.before(buttonBack)
+
+
+   const addWorksHeader = document.querySelector("#modalHeader")
+   addWorksHeader.textContent = "Ajout Photo"
+
+   const addWorksGallery = document.querySelector(".modalGallery")
+   addWorksGallery.innerHTML = ""
+   addWorksGallery.style.display = "flex"
+   addWorksGallery.style.flexDirection = "column"
+   addWorksGallery.style.alignItems = "center"
+
+   const svgIcon = document.createElement ("img")
+   svgIcon.src = "./assets/icons/image-icon.png"
+   svgIcon.className = "svgIcon"
+   addWorksGallery.appendChild(svgIcon)
+
+   const buttonAddPhoto = document.createElement("button")
+   buttonAddPhoto.innerText = "+ Ajouter photo"
+   buttonAddPhoto.className = "btnAddPhoto"
+   addWorksGallery.appendChild(buttonAddPhoto)
+
+
+
+   const buttonValider = document.querySelector("#modalAjouter")
+   buttonValider.textContent = "Valider"
+
+}
+
+function addEventForAjouter() {
+   const buttonAjouter = document.querySelector("#modalAjouter")
+   
+   buttonAjouter.addEventListener("click", addWorks)
+}
+// TODO addEventForBack
+// function addEventForBack () {
+//    const buttonBack = document.querySelector(".buttonBack")
+//    buttonBack.addEventListener("click", showModal)
+//    const buttonValider = document.querySelector("#modalAjouter")
+//    buttonValider.textContent = "Ajouter une photo"
+// }
+
+addEventForAjouter()
+

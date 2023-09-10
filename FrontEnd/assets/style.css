@@ -206,17 +206,12 @@ a {
 
 .gallery img {
 	width: 100%;
-
 }
 
-.imgModalGallery {
-	width: 30px;
-	height: 30px;
-}
 
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 #contact > * {
 	text-align: center;
@@ -319,8 +314,9 @@ footer nav ul {
 	font-weight: 500;
  }
 
- .modal .gallery {
+ .modal .modalGallery {
 	display: flex;
+	border: 1px solid red;
 	flex-wrap: wrap;
 	height: 400px;
 	width: 550px;
@@ -329,21 +325,24 @@ footer nav ul {
 	gap: 10px;
 	padding-left: 65px;
  }
- .modal .gallery figure {
+
+ .modal .modalGallery figure {
 	position: relative;
+	height: 102px;
  }
 
- .modal .gallery figure img:first-child {
+
+ .modal .modalGallery figure img:first-child {
 	width: 76px;
 	height: 102px;
  }
 
  .iconDelete {
 	position: absolute;
-		height: 13px;
-		width:13px !important;
-		right:5px;
-		top: 8px;
+	height: 13px;
+	width:13px !important;
+	top: 5px;
+	right: 5px;
  }
 
  .modal .gallery figcaption {
@@ -368,4 +367,28 @@ footer nav ul {
 	font-family: Syne;
 	font-size: 14px;
 	margin-top: 30px;
+ }
+
+ .buttonBack {
+	height: 25px;
+	width: 25px;
+	position: absolute;
+	top: 30px;
+	left: 40px;
+ }
+
+ .svgIcon {
+	border: 1px solid red;
+	height: 76px;
+	width: 76px;
+	opacity: 0.2;
+ }
+
+ .btnAddPhoto {
+	height: 36px;
+	width: 173px;
+	border-radius: 50px;
+	border-color: white;
+	color: #306685;
+	
  }
