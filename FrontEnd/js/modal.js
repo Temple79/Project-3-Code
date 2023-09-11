@@ -116,7 +116,6 @@ function addWorks () {
    buttonBack.className = "buttonBack"
    buttonClose.before(buttonBack)
 
-
    const addWorksHeader = document.querySelector("#modalHeader")
    addWorksHeader.textContent = "Ajout Photo"
 
@@ -135,6 +134,7 @@ function addWorks () {
    buttonAddPhoto.innerText = "+ Ajouter photo"
    buttonAddPhoto.className = "btnAddPhoto"
    addWorksGallery.appendChild(buttonAddPhoto)
+   openDialogButton()
    
    const imageInfo = document.createElement("p")
    imageInfo.className = "imageInfo"
@@ -146,6 +146,7 @@ function addWorks () {
 
    const buttonValider = document.querySelector("#modalAjouter")
    buttonValider.textContent = "Valider"
+
 
 }
 
@@ -163,13 +164,33 @@ function addEventForAjouter() {
    const buttonAjouter = document.querySelector("#modalAjouter")
    buttonAjouter.addEventListener("click", buttonAjouterValider)
 }
-// TODO addEventForBack
+
 // function addEventForBack () {
 //    const buttonBack = document.querySelector(".buttonBack")
 //    buttonBack.addEventListener("click", showModal)
-//    const buttonValider = document.querySelector("#modalAjouter")
-//    buttonValider.textContent = "Ajouter une photo"
 // }
 
 addEventForAjouter()
 
+function openDialogButton() {
+  const buttonAddPhoto = document.querySelector(".btnAddPhoto")
+  buttonAddPhoto.addEventListener('click', function() {
+    const fileInput = document.createElement('input')
+    const previewImage = document.querySelector(".svgIcon")
+    fileInput.type = 'file'
+    fileInput.accept = 'image/*'
+    fileInput.addEventListener('change', function(event) {
+      const selectedFile = event.target.files[0]
+      var reader = new FileReader();
+
+      reader.onload = function(e) {
+      previewImage.src = e.target.result;
+     }
+
+    reader.readAsDataURL(selectedFile);
+
+    console.log(selectedFile)
+    });
+    fileInput.click();
+  });
+}
