@@ -103,7 +103,18 @@
 				<span aria-hidden="true">&times;</span>
 			  </button>
 			<p id="modalHeader">Galérie Photo</p>
-			<div class="modalGallery"></div>
+			<div class="modalGallery"></div>	
+			<div id="divInputForm">
+				<form class="inputForm" action="#" method="post">
+					<label for="name">Titre</label>
+					<input type="text" name="titre" id="titre">
+					<label for="choice">Catégorie</label>
+					<select name="choice" id="choice">
+						<option value="category1">Catégorie 1</option>
+						<option value="category2">Catégorie 2</option>
+					</select>
+				</form>
+			</div>	
 			<div class="line"></div>
 			<button id="modalAjouter">Ajouter une photo</button>
 		</div>

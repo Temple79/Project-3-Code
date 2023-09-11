@@ -316,14 +316,13 @@ footer nav ul {
 
  .modal .modalGallery {
 	display: flex;
-	border: 1px solid red;
 	flex-wrap: wrap;
 	height: 400px;
 	width: 550px;
 	padding: 35px;
 	box-sizing: border-box;
 	gap: 10px;
-	padding-left: 65px;
+	padding-left: 45px;
  }
 
  .modal .modalGallery figure {
@@ -378,7 +377,6 @@ footer nav ul {
  }
 
  .svgIcon {
-	border: 1px solid red;
 	height: 76px;
 	width: 76px;
 	opacity: 0.2;
@@ -386,9 +384,40 @@ footer nav ul {
 
  .btnAddPhoto {
 	height: 36px;
-	width: 173px;
+	width: 163px;
 	border-radius: 50px;
 	border-color: white;
 	color: #306685;
+	background-color: #CBD6DC;
 	
+ }
+
+ .imageInfo {
+	font-size: 10px;
+ }
+
+ #divInputForm {
+	display: none;
+	width: 420px;
+	height: 100px;
+	gap: 50px;
+	padding-top: 20px;
+ }
+ 
+ .inputForm {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+ }
+
+ .inputForm input{
+	height: 40px;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+ }
+
+ .inputForm select {
+	height: 50px;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
  }

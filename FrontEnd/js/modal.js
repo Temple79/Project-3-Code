@@ -2,13 +2,16 @@
 
 const modalGallery = document.querySelector(".modalGallery")
 const figure = modalGallery.getElementsByTagName("figure")
+const divInputForm = document.getElementById("divInputForm")
+
 
 
 closeModal();
 
 
  function closeModal() {
-
+    const buttonValider = document.querySelector("#modalAjouter")
+    buttonValider.textContent = "Ajouter une photo"
     const overlay=document.querySelector("#overlay");
     const modal=document.querySelector("#modal");
 
@@ -18,8 +21,8 @@ closeModal();
 
  function showModal() {
 
-    const modal=document.querySelector("#modal");
-    const overlay=document.querySelector("#overlay");
+    const modal=document.querySelector("#modal")
+    const overlay=document.querySelector("#overlay")
 
     modal.style.display = "block"
     overlay.style.display = "block"
@@ -132,18 +135,33 @@ function addWorks () {
    buttonAddPhoto.innerText = "+ Ajouter photo"
    buttonAddPhoto.className = "btnAddPhoto"
    addWorksGallery.appendChild(buttonAddPhoto)
+   
+   const imageInfo = document.createElement("p")
+   imageInfo.className = "imageInfo"
+   imageInfo.innerText = "jpg.png : 4go max"
+   addWorksGallery.appendChild(imageInfo)
 
-
+   modalGallery.appendChild(divInputForm)
+   divInputForm.style.display = "block"
 
    const buttonValider = document.querySelector("#modalAjouter")
    buttonValider.textContent = "Valider"
 
 }
 
+function buttonAjouterValider(){ 
+  let buttonText = document.querySelector("#modalAjouter").textContent
+  if (buttonText === "Ajouter une photo"){
+    addWorks()
+  }
+  else if (buttonText === "Valider"){
+    console.log("dobata sucks");   
+  }
+}
+
 function addEventForAjouter() {
    const buttonAjouter = document.querySelector("#modalAjouter")
-   
-   buttonAjouter.addEventListener("click", addWorks)
+   buttonAjouter.addEventListener("click", buttonAjouterValider)
 }
 // TODO addEventForBack
 // function addEventForBack () {
