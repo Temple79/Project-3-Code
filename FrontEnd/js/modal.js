@@ -2,195 +2,229 @@
 
 const modalGallery = document.querySelector(".modalGallery")
 const figure = modalGallery.getElementsByTagName("figure")
-const divInputForm = document.getElementById("divInputForm")
+
+const inputForm = document.querySelector(".inputForm")
 
 
+initModal();
 
-closeModal();
+
+function initModal() {
+    modal__close()
+    addEvent_modal__close_overlay()
+    addEvent_modal__close_cross()
+    addEventForAjouter()
+    addEventForBack()
+    contentGallery__hide()
+    contentForm__hide()
+    addEventForbtnAddPhoto()
+    addEventForbtnFormInputFile()
+}
 
 
- function closeModal() {
+function modal__close() {
     const buttonValider = document.querySelector("#modalAjouter")
     buttonValider.textContent = "Ajouter une photo"
-    const overlay=document.querySelector("#overlay");
-    const modal=document.querySelector("#modal");
+    const overlay = document.querySelector("#overlay");
+    const modal = document.querySelector("#modal");
 
-     modal.style.display = "none"
-     overlay.style.display = "none"
- }
+    modal.style.display = "none"
+    overlay.style.display = "none"
+}
 
- function showModal() {
+function modal__show() {
 
-    const modal=document.querySelector("#modal")
-    const overlay=document.querySelector("#overlay")
+    const modal = document.querySelector("#modal")
+    const overlay = document.querySelector("#overlay")
 
     modal.style.display = "block"
     overlay.style.display = "block"
 
-    addGalleryForModal()
-     
- }
+    modal__show_gallery()
 
- function addEventForBtnModif() {
+    contentGallery__show()
+    contentForm__hide()
+
+}
+
+function addEventForBtnModif() {
     const buttonModifier = document.querySelector(".js_modal")
-    buttonModifier.addEventListener("click", showModal)
- }
-
- function addEventForBtnClose() {
-   const buttonClose = document.querySelector(".close")
-   buttonClose.addEventListener("click", closeModal)
- }
-
-   async function addGalleryForModal() {
-   let modalData = await getApiData(api_url)
-   modal__show(modalData) 
-   const arr = Array.from(figure)
-   addTrashIcon(arr)
- }
-
- function modal__show(data) {
-  const gallery = document.querySelector(".modalGallery")
-  gallery.innerHTML = ""
-
-  for (let i = 0; i < data.length; i++) {
-      const figure = document.createElement("figure")
-      const image = document.createElement("img")
-      const figcaption = document.createElement("figcaption")
-
-      image.src = data[i].imageUrl
-      image.alt = data[i].title
-      image.setAttribute("data-id", data[i].id)
-      image.classList.add("imgModalGallery")
-      
-      figure.appendChild(image)
-      figure.appendChild(figcaption)
-
-      gallery.appendChild(figure)
-  }
+    buttonModifier.addEventListener("click", modal__show)
 }
 
- addEventForBtnClose()
 
- function addTrashIcon(arr) {
-
-   for (let i = 0; i < arr.length; i++) {
-      const trashIcon = document.createElement("img")
-      trashIcon.src = "./assets/icons/trash.png"
-      trashIcon.className="iconDelete"
-      
-      arr[i].appendChild(trashIcon)
-
-      trashIcon.addEventListener("click", async (e) => {
-         e.preventDefault();
-         e.stopPropagation();
-
-         let image = e.target.parentNode.firstElementChild
-         let articleID = image.dataset.id         
-         let monToken = localStorage.getItem("token");
-
-         let response = await fetch(
-           `http://localhost:5678/api/works/${articleID}`,
-           {
-             method: "DELETE",
-             headers: {
-               accept: "*/*",
-               Authorization: `Bearer ${monToken}`,
-             },
-           }
-         );
-         console.log(response)
-         if (response.ok) {
-           return false;
-         } else {
-           alert("Echec de suppression");
-         }
-      })
-   }
+function addEvent_modal__close_overlay() {
+    const overlay = document.querySelector("#overlay")
+    overlay.addEventListener("click", function (event) {
+        modal__close();
+    });
+}
+function addEvent_modal__close_cross() {
+    const crossbutton = document.querySelector(".close")
+    crossbutton.addEventListener("click", function (event) {
+        modal__close();
+    });
 }
 
-function addWorks () {
-   const buttonClose = document.querySelector (".close")
-
-   const buttonBack = document.createElement ("img")
-   buttonBack.src = "./assets/icons/Back-Button-PNG-Pic.png"
-   buttonBack.className = "buttonBack"
-   buttonClose.before(buttonBack)
-
-   const addWorksHeader = document.querySelector("#modalHeader")
-   addWorksHeader.textContent = "Ajout Photo"
-
-   const addWorksGallery = document.querySelector(".modalGallery")
-   addWorksGallery.innerHTML = ""
-   addWorksGallery.style.display = "flex"
-   addWorksGallery.style.flexDirection = "column"
-   addWorksGallery.style.alignItems = "center"
-
-   const svgIcon = document.createElement ("img")
-   svgIcon.src = "./assets/icons/image-icon.png"
-   svgIcon.className = "svgIcon"
-   addWorksGallery.appendChild(svgIcon)
-
-   const buttonAddPhoto = document.createElement("button")
-   buttonAddPhoto.innerText = "+ Ajouter photo"
-   buttonAddPhoto.className = "btnAddPhoto"
-   addWorksGallery.appendChild(buttonAddPhoto)
-   openDialogButton()
-   
-   const imageInfo = document.createElement("p")
-   imageInfo.className = "imageInfo"
-   imageInfo.innerText = "jpg.png : 4go max"
-   addWorksGallery.appendChild(imageInfo)
-
-   modalGallery.appendChild(divInputForm)
-   divInputForm.style.display = "block"
-
-   const buttonValider = document.querySelector("#modalAjouter")
-   buttonValider.textContent = "Valider"
-
-
+async function modal__show_gallery() {
+    let modalData = await getApiData(api_url)
+    gallery__render(modalData)
+    const arr = Array.from(figure)
+    addTrashIcon(arr)
+    buttonBack__hide()
 }
 
-function buttonAjouterValider(){ 
-  let buttonText = document.querySelector("#modalAjouter").textContent
-  if (buttonText === "Ajouter une photo"){
-    addWorks()
-  }
-  else if (buttonText === "Valider"){
-    console.log("dobata sucks");   
-  }
+function gallery__render(data) {
+    const gallery = document.querySelector(".modalGallery")
+    gallery.innerHTML = ""
+
+    for (let i = 0; i < data.length; i++) {
+        const figure = document.createElement("figure")
+        const image = document.createElement("img")
+        const figcaption = document.createElement("figcaption")
+
+        image.src = data[i].imageUrl
+        image.alt = data[i].title
+        image.setAttribute("data-id", data[i].id)
+        image.classList.add("imgModalGallery")
+
+        figure.appendChild(image)
+        figure.appendChild(figcaption)
+
+        gallery.appendChild(figure)
+
+    }
+}
+
+
+
+function addTrashIcon(arr) {
+
+    for (let i = 0; i < arr.length; i++) {
+        const trashIcon = document.createElement("img")
+        trashIcon.src = "./assets/icons/trash.png"
+        trashIcon.className = "iconDelete"
+
+        arr[i].appendChild(trashIcon)
+
+        trashIcon.addEventListener("click", async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            let image = e.target.parentNode.firstElementChild
+            let articleID = image.dataset.id
+            let monToken = localStorage.getItem("token");
+
+            let response = await fetch(
+                `http://localhost:5678/api/works/${articleID}`,
+                {
+                    method: "DELETE",
+                    headers: {
+                        accept: "*/*",
+                        Authorization: `Bearer ${monToken}`,
+                    },
+                }
+            );
+            console.log(response)
+            if (response.ok) {
+                return false;
+            } else {
+                alert("Echec de suppression");
+            }
+        })
+    }
+}
+
+function buttonBack__show() {
+    const element = document.querySelector(".buttonBack")
+    element.style.display = "block"
+}
+function buttonBack__hide() {
+    const element = document.querySelector(".buttonBack")
+    element.style.display = "none"
+}
+function contentGallery__show() {
+    const element = document.querySelector("#divModalContentGallery")
+    element.style.display = "block"
+}
+function contentGallery__hide() {
+    const element = document.querySelector("#divModalContentGallery")
+    element.style.display = "none"
+}
+function contentForm__show() {
+    const element = document.querySelector("#divModalContentForm")
+    element.style.display = "block"
+}
+function contentForm__hide() {
+    const element = document.querySelector("#divModalContentForm")
+    element.style.display = "none"
+}
+
+
+function addWorks() {
+    contentGallery__hide()
+    contentForm__show()
+    buttonBack__show()
+}
+
+
+function addEventForbtnFormInputFile() {
+
+    const element = document.querySelector("#form_input_file")
+    element.addEventListener("change",(event)=> {
+        const selectedFile = event.target.files[0]
+        const previewImage = document.querySelector(".svgIcon")
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            previewImage.src = e.target.result;
+        }
+
+        reader.readAsDataURL(selectedFile);
+
+    } )
+}
+function addEventForbtnAddPhoto() {
+
+    const element = document.querySelector("#form_input_file")
+    element.addEventListener("click",()=> {
+        const fileInput = document.querySelector("#form_input_file")
+        fileInput.style.display='none';
+    
+    } )
 }
 
 function addEventForAjouter() {
-   const buttonAjouter = document.querySelector("#modalAjouter")
-   buttonAjouter.addEventListener("click", buttonAjouterValider)
+    const buttonAjouter = document.querySelector("#modalAjouter")
+    buttonAjouter.addEventListener("click",()=> {
+
+        addWorks()
+    } )
 }
 
-// function addEventForBack () {
-//    const buttonBack = document.querySelector(".buttonBack")
-//    buttonBack.addEventListener("click", showModal)
-// }
 
-addEventForAjouter()
 
-function openDialogButton() {
-  const buttonAddPhoto = document.querySelector(".btnAddPhoto")
-  buttonAddPhoto.addEventListener('click', function() {
-    const fileInput = document.createElement('input')
-    const previewImage = document.querySelector(".svgIcon")
-    fileInput.type = 'file'
-    fileInput.accept = 'image/*'
-    fileInput.addEventListener('change', function(event) {
-      const selectedFile = event.target.files[0]
-      var reader = new FileReader();
+function addEventForBack() {
+    const buttonBack = document.querySelector(".buttonBack")
+    buttonBack.addEventListener("click", () => {
+        inputForm.reset()
+        modal__show()
+        
+    })
+}
 
-      reader.onload = function(e) {
-      previewImage.src = e.target.result;
-     }
+function addEventForForm () {
 
-    reader.readAsDataURL(selectedFile);
+    inputForm.addEventListener("submit", (e)=>{
+        e.preventDefault()
+        console.log("liuliak")
+    })
 
-    console.log(selectedFile)
-    });
-    fileInput.click();
-  });
+
+}
+
+function handleFormSubmit(e) {
+    console.log("doba");
+    const formData = new FormData(inputForm)
+    
 }
