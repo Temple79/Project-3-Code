@@ -113,7 +113,7 @@ function addTrashIcon(arr) {
 
             let image = e.target.parentNode.firstElementChild
             let articleID = image.dataset.id
-            let monToken = localStorage.getItem("token");
+            let monToken = localStorage.getItem("token")
 
             let response = await fetch(
                 `http://localhost:5678/api/works/${articleID}`,
@@ -217,29 +217,32 @@ function addEventForBack() {
 function handleFormSubmit(e) {
     e.preventDefault()
     const formData = new FormData(inputForm)
-    const file = formData.get("image")
-    console.log(file);
+    const title = document.querySelector("#title").value;
+    const img = document.querySelector("#form_input_file").files[0];
+    const cat = document.querySelector("#category").selectedIndex;
+    //const data = Object.fromEntries(formData.entries())
+    formData.append["title"]=title;
+    formData.append["category"]=cat;
+    formData.append["image"]=img;  
     
-    // uploadWorks(value)
+    uploadWorks(formData)
 
 }
 
 
 
-//    async function uploadWorks (value) {
-//      const worksValue = {formData: value}
-//      console.log(worksValue);
-     
-//      let response = await fetch('http://localhost:5678/api/works', {
-//         method: 'POST',
-//         body: worksValue(value),
-//         headers: {
-//         Authorization: `Bearer ${token.token}`   
-//          },
-//      })
+   async function uploadWorks (value) {
+     let monToken = localStorage.getItem("token")
 
-//      let result = await response.json()
-
-//      console.log(result);
      
-//  }
+     let response = await fetch('http://localhost:5678/api/works', {
+        method: 'POST',
+        body: value,
+        headers: {
+            Authorization: `Bearer ${monToken}`,   
+         },
+     })
+
+     let result = await response.json()
+     
+ }
