@@ -2,9 +2,9 @@
 
 const modalGallery = document.querySelector(".modalGallery")
 const figure = modalGallery.getElementsByTagName("figure")
-
 const inputForm = document.querySelector(".inputForm")
 
+inputForm.addEventListener("submit", handleFormSubmit)
 
 initModal();
 
@@ -213,18 +213,33 @@ function addEventForBack() {
     })
 }
 
-function addEventForForm () {
-
-    inputForm.addEventListener("submit", (e)=>{
-        e.preventDefault()
-        console.log("liuliak")
-    })
-
-
-}
 
 function handleFormSubmit(e) {
-    console.log("doba");
+    e.preventDefault()
     const formData = new FormData(inputForm)
+    const file = formData.get("image")
+    console.log(file);
     
+    // uploadWorks(value)
+
 }
+
+
+
+//    async function uploadWorks (value) {
+//      const worksValue = {formData: value}
+//      console.log(worksValue);
+     
+//      let response = await fetch('http://localhost:5678/api/works', {
+//         method: 'POST',
+//         body: worksValue(value),
+//         headers: {
+//         Authorization: `Bearer ${token.token}`   
+//          },
+//      })
+
+//      let result = await response.json()
+
+//      console.log(result);
+     
+//  }
