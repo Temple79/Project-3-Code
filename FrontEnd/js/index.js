@@ -25,6 +25,7 @@ function iAmAnAdmin() {
     createBannerEdition()
 
     addEventForBtnModif()
+
 }
 function iAmNotAnAdmin() {
     alert ("je ne suis pas un admin")
@@ -83,4 +84,17 @@ function createBannerEdition() {
 }
 
 
+function logOut (){
+    const buttonLogin = document.querySelector("#buttonLogin")
+    
+    buttonLogin.addEventListener("click", (e) => {
+        if  (buttonLogin.textContent === "Logout") {
+            e.preventDefault()
+            localStorage.removeItem('token')
+            window.location="index.html"
+    }
+    })
+    
+}
 
+logOut()

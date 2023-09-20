@@ -3,6 +3,7 @@
 const modalGallery = document.querySelector(".modalGallery")
 const figure = modalGallery.getElementsByTagName("figure")
 const inputForm = document.querySelector(".inputForm")
+const previewImage = document.querySelector(".svgIcon")
 
 inputForm.addEventListener("submit", handleFormSubmit)
 
@@ -30,6 +31,9 @@ function modal__close() {
 
     modal.style.display = "none"
     overlay.style.display = "none"
+
+    inputForm.reset()
+    previewImage.src = "./assets/icons/image-icon.png"
 }
 
 function modal__show() {
@@ -125,7 +129,11 @@ function addTrashIcon(arr) {
                     },
                 }
             );
-            console.log(response)
+
+            const mainData = await getApiData(api_url)
+            modal__show_gallery()
+            gallery__show(mainData)
+
             if (response.ok) {
                 return false;
             } else {
@@ -173,7 +181,7 @@ function addEventForbtnFormInputFile() {
     const element = document.querySelector("#form_input_file")
     element.addEventListener("change",(event)=> {
         const selectedFile = event.target.files[0]
-        const previewImage = document.querySelector(".svgIcon")
+       
         var reader = new FileReader();
 
         reader.onload = function (e) {
@@ -208,6 +216,7 @@ function addEventForBack() {
     const buttonBack = document.querySelector(".buttonBack")
     buttonBack.addEventListener("click", () => {
         inputForm.reset()
+        previewImage.src = "./assets/icons/image-icon.png"
         modal__show()
         
     })
@@ -220,7 +229,7 @@ function handleFormSubmit(e) {
     const title = document.querySelector("#title").value;
     const img = document.querySelector("#form_input_file").files[0];
     const cat = document.querySelector("#category").selectedIndex;
-    //const data = Object.fromEntries(formData.entries())
+
     formData.append["title"]=title;
     formData.append["category"]=cat;
     formData.append["image"]=img;  
@@ -242,6 +251,12 @@ function handleFormSubmit(e) {
             Authorization: `Bearer ${monToken}`,   
          },
      })
+     if (response.ok) {
+        const mainData = await getApiData(api_url)
+        gallery__show(mainData)
+        modal__close()
+     }
+     
 
      let result = await response.json()
      
