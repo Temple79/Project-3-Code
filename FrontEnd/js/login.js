@@ -12,8 +12,6 @@ async function ajoutForm (event) {
     const email = formData.get("email") 
     const password = formData.get("password")
 
-    console.log(email,password)
-
     login(email, password)
 }
 
