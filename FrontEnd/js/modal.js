@@ -3,9 +3,21 @@
 const modalGallery = document.querySelector(".modalGallery")
 const figure = modalGallery.getElementsByTagName("figure")
 const inputForm = document.querySelector(".inputForm")
+const errorMessageForm = document.querySelector(".errorForm")
+
 const previewImage = document.querySelector(".svgIcon")
 
-inputForm.addEventListener("submit", handleFormSubmit)
+
+inputForm.addEventListener("submit", function(event) {
+
+    if (checkAllFieldsFilled()) {
+        handleFormSubmit(event)
+    } 
+    else {
+        event.preventDefault()
+        errorMessageForm.style.display = "block"
+    }
+})
 
 initModal();
 
@@ -179,9 +191,9 @@ function addWorks() {
 function addEventForbtnFormInputFile() {
 
     const element = document.querySelector("#form_input_file")
-    element.addEventListener("change",(event)=> {
+    element.addEventListener("change", (event) => {
         const selectedFile = event.target.files[0]
-       
+
         var reader = new FileReader();
 
         reader.onload = function (e) {
@@ -190,24 +202,24 @@ function addEventForbtnFormInputFile() {
 
         reader.readAsDataURL(selectedFile);
 
-    } )
+    })
 }
 function addEventForbtnAddPhoto() {
 
     const element = document.querySelector("#form_input_file")
-    element.addEventListener("click",()=> {
+    element.addEventListener("click", () => {
         const fileInput = document.querySelector("#form_input_file")
-        fileInput.style.display='none';
-    
-    } )
+        fileInput.style.display = 'none';
+
+    })
 }
 
 function addEventForAjouter() {
     const buttonAjouter = document.querySelector("#modalAjouter")
-    buttonAjouter.addEventListener("click",()=> {
+    buttonAjouter.addEventListener("click", () => {
 
         addWorks()
-    } )
+    })
 }
 
 
@@ -218,46 +230,77 @@ function addEventForBack() {
         inputForm.reset()
         previewImage.src = "./assets/icons/image-icon.png"
         modal__show()
-        
+
     })
 }
 
 
 function handleFormSubmit(e) {
+    
     e.preventDefault()
     const formData = new FormData(inputForm)
     const title = document.querySelector("#title").value;
     const img = document.querySelector("#form_input_file").files[0];
-    const cat = document.querySelector("#category").selectedIndex;
+    const cat = document.querySelector("#choice").selectedIndex;
 
-    formData.append["title"]=title;
-    formData.append["category"]=cat;
-    formData.append["image"]=img;  
-    
+    formData.append["title"] = title;
+    formData.append["category"] = cat;
+    formData.append["image"] = img;
+
     uploadWorks(formData)
 
 }
 
 
 
-   async function uploadWorks (value) {
-     let monToken = localStorage.getItem("token")
+async function uploadWorks(value) {
+    let monToken = localStorage.getItem("token")
 
-     
-     let response = await fetch('http://localhost:5678/api/works', {
+
+    let response = await fetch('http://localhost:5678/api/works', {
         method: 'POST',
         body: value,
         headers: {
-            Authorization: `Bearer ${monToken}`,   
-         },
-     })
-     if (response.ok) {
+            Authorization: `Bearer ${monToken}`,
+        },
+    })
+    if (response.ok) {
         const mainData = await getApiData(api_url)
         gallery__show(mainData)
         modal__close()
-     }
-     
+    }
 
-     let result = await response.json()
-     
- }
+
+    let result = await response.json()
+
+}
+
+
+    inputForm[0].addEventListener('blur', checkAllFieldsFilled)
+    inputForm[1].addEventListener('blur', checkAllFieldsFilled)
+    inputForm[2].addEventListener('blur', checkAllFieldsFilled)
+    
+
+function checkAllFieldsFilled() {
+    let allFieldsFilled = false
+    const title = document.querySelector("#title")?.value
+    const img = document.querySelector("#form_input_file")?.files
+    
+    const cat = document.querySelector("#category")?.selectedIndex
+    
+    const button = document.getElementById('btn_post_photo')
+    if (img.length > 0 && title != "" && cat != 0){
+        allFieldsFilled = true
+    }
+    else {
+        allFieldsFilled = false
+    }
+    if (allFieldsFilled) {  
+      button.style.backgroundColor = 'green'
+      errorMessageForm.style.display = "none"
+      return allFieldsFilled
+    } else {
+      button.style.backgroundColor = '#A7A7A7'
+      return allFieldsFilled
+    }
+  }

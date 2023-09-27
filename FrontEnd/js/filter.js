@@ -9,46 +9,40 @@ function filter__create() {
         let button = document.createElement("button")
         button.textContent = element
         button.classList.add("btn")
-        divFilter.style.display="flex"
-        divFilter.style.justifyContent="center"
-        divFilter.style.alignItems="center"
-        divFilter.style.paddingBottom="30px"
-        divFilter.style.gap="10px"
-        button.style.color="#1D6154"
-        button.style.backgroundColor="inherit"
-        button.style.borderRadius="60px"
-        button.style.borderColor="#1D6154"
-        button.style.height="37px"
-        button.style.fontWeight="bolder"
-        button.style.borderWidth="1px"
-        button.style.alignItems="center"
-        button.style.padding="10px"
+        divFilter.style.display = "flex"
+        divFilter.style.justifyContent = "center"
+        divFilter.style.alignItems = "center"
+        divFilter.style.paddingBottom = "30px"
+        divFilter.style.gap = "10px"
+        button.style.color = "#1D6154"
+        button.style.backgroundColor = "inherit"
+        button.style.borderRadius = "60px"
+        button.style.borderColor = "#1D6154"
+        button.style.height = "37px"
+        button.style.fontWeight = "bolder"
+        button.style.borderWidth = "1px"
+        button.style.alignItems = "center"
+        button.style.padding = "10px"
 
         divFilter.appendChild(button)
     });
 
+    divFilter.addEventListener("click", (e) =>{
+        filter__eventHandler(e)   
+        const selectedFilter = e.target
+        let children = e.target.parentNode.children
 
-    divFilter.addEventListener("click", filter__eventHandler)
+        for (let i=0; i<children.length; i++) {
+            children[i].style.backgroundColor = "white"
+        }
 
-
+        if (selectedFilter.tagName === "BUTTON") {
+        selectedFilter.style.backgroundColor = "green"
+        }
+    })
     gallery.before(divFilter)
-
-//     const buttonHover = document.querySelector(".btn")
-//     buttonHover.addEventListener("mouseover", hoverOn, false)
-//     buttonHover.addEventListener("mouseout", hoverOff, false)
-
-//     function hoverOn()
-//     {   
-//    buttonHover.setAttribute("style", "background-color:green;")
-//     }
-
-//     function hoverOff()
-//     {  
-//    buttonHover.setAttribute("style", "background-color:inherit;")
-//     }
-    
-
 }
+
 
 async function filter__eventHandler(event) {
     if (event.target.tagName === "BUTTON") {
@@ -57,13 +51,13 @@ async function filter__eventHandler(event) {
 
         switch (currentButton.textContent) {
             case 'Objets':
-                datas = filter__apply(datas,1);
+                datas = filter__apply(datas, 1);
                 break;
             case 'Appartements':
-                datas = filter__apply(datas,2);
+                datas = filter__apply(datas, 2);
                 break;
             case 'Hôtels & Restaurants':
-                datas = filter__apply(datas,3);
+                datas = filter__apply(datas, 3);
                 break;
         }
         gallery__show(datas)
@@ -71,7 +65,7 @@ async function filter__eventHandler(event) {
     }
 }
 function filter__apply(datas, filter) {
-   return datas.filter((x) => {
+    return datas.filter((x) => {
         return x.categoryId === filter;
     })
 }

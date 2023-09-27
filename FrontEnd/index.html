@@ -106,7 +106,7 @@
 		<div id="overlay"></div>
 		<div id="modal" class="modal">
 			<div class="modal_Wraper">
-				<img src="./assets/icons/Back-Button-PNG-Pic.png" class="buttonBack" al="retour arrière" />
+				<img src="./assets/icons/Back-Button-PNG-Pic.png" class="buttonBack" alt="retour arrière">
 				<button type="button" class="close" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -121,20 +121,23 @@
 				<div id="divModalContentForm">
 					<p>Ajout Photo</p>
 					<form class="inputForm" enctype="multipart/form-data" action="#" method="post">
-						<img src="./assets/icons/image-icon.png" alt="Rendu de la photo ajoutée" class="svgIcon">
-						<input name="image" type="file" accept="image/*" id="form_input_file">
-						<label id="inputFile" for="form_input_file">+ Ajouter photo</label>
-						<span class="inputImageInfo'">jpg.png : 4Mo max</span>
-						<break></break>
+						<div class="formColor">
+							<img src="./assets/icons/image-icon.png" alt="Rendu de la photo ajoutée" class="svgIcon">
+							<input name="image" type="file" accept="image/*" id="form_input_file">
+							<label id="inputFile" for="form_input_file">+ Ajouter photo</label>
+							<span class="inputImageInfo'">jpg.png : 4Mo max</span>
+						</div>
 						<label id="inputText" for="name">Titre</label>
 						<input type="text" name="title" id="title">
 						<label id="inputChoice" for="choice">Catégories</label>
-						<select name="category" id="category">
+						<select name="category" id="choice">
+							<option value=""></option>
 							<option value="1">Objets</option>
 							<option value="2">Appartements</option>
 							<option value="3">Hotels & Restaurants</option>
 						</select>
 						<div class="lineInput"></div>
+						<p class="errorForm">Merci de rajouter une photo, un titre et une catégorie</p>
 						<input type="submit" value="Valider" id="btn_post_photo">
 					</form>
 				</div>

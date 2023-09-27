@@ -10,15 +10,14 @@ async function initialPageLoad() {
     checkIsAdmin()
 }
 
-function checkIsAdmin()
-{
+function checkIsAdmin() {
     localStorage.getItem('token') ? iAmAnAdmin() : iAmNotAnAdmin()
 }
 
 function iAmAnAdmin() {
     const buttonLogin = document.querySelector("#buttonLogin")
     buttonLogin.textContent = "Logout"
-    
+
     const divFilter = document.querySelector(".divFilters")
     divFilter.remove()
 
@@ -28,7 +27,8 @@ function iAmAnAdmin() {
 
 }
 function iAmNotAnAdmin() {
-    alert ("je ne suis pas un admin")
+  console.log("I am not an admin");
+  
 }
 
 initialPageLoad()
@@ -67,7 +67,7 @@ function createBannerEdition() {
     modeEdition.style.fontSize = "16px"
     modeEdition.style.fontFamily = "Work Sans"
     mesProjets.style.display = "flex"
-    mesProjets.style.justifyContent = "center"   
+    mesProjets.style.justifyContent = "center"
     mesProjets.style.alignItems = "center"
     mesProjets.style.gap = "10px"
     imageModifier.style.height = "15px"
@@ -84,17 +84,17 @@ function createBannerEdition() {
 }
 
 
-function logOut (){
+function logOut() {
     const buttonLogin = document.querySelector("#buttonLogin")
-    
+
     buttonLogin.addEventListener("click", (e) => {
-        if  (buttonLogin.textContent === "Logout") {
+        if (buttonLogin.textContent === "Logout") {
             e.preventDefault()
             localStorage.removeItem('token')
-            window.location="index.html"
-    }
+            window.location = "index.html"
+        }
     })
-    
+
 }
 
 logOut()
